@@ -1,7 +1,7 @@
-CXX = g++
+CXX = g++ 
 SHADER_CXX = glslc
 
-CFLAGS = -std=c++17 -O2
+CFLAGS = -g -std=c++17 -O2
 LDFLAGS = -lglfw -lvulkan -ldl -lpthread 
 
 ONLY_HEADERS = $(wildcard *.h)
@@ -19,7 +19,7 @@ OBJ_SHADER = $(addsuffix .spv,$(SRC_SHADER))
 
 NAME = VulkanEngineTemplate
 
-%.o: %.cpp %.h $(ONLY_HEADERS)
+.cpp.o: %.cpp %.h $(ONLY_HEADERS)
 	$(CXX) $(CFLAGS) -o $@ -c $<
 
 %.vert.spv: %.vert
@@ -38,8 +38,7 @@ NAME = VulkanEngineTemplate
 	$(SHADER_CXX) $^ -o $@ 
 
 $(NAME): main.cpp $(OBJ_FILES) $(OBJ_SHADER)
-	$(CXX) -o $(NAME) $(CFLAGS) $(OBJ_FILES) main.cpp $(LDFLAGS)
-	clear
+	$(CXX) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJ_FILES) main.cpp
 
 .PHONY: run clean
 
