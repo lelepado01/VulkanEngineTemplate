@@ -69,6 +69,8 @@ public:
     
     float GetAspectRatio(){ return swapChain->extentAspectRatio(); };
 
+	int GetSwapChainImageCount() const { return swapChain->imageCount(); };
+
 };
 
 #endif /* EngineRenderer_h */

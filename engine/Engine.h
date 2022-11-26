@@ -8,9 +8,9 @@
 #ifndef Engine_h
 #define Engine_h
 
-// #include "imgui.h"
-// #include "imgui_impl_glfw.h"
-// #include "imgui_impl_vulkan.h"
+#include "../imgui/imgui.h"
+#include "../imgui/imgui_impl_glfw.h"
+#include "../imgui/imgui_impl_vulkan.h"
 
 #include "vulkan/vulkan.h"
 
@@ -79,6 +79,9 @@ public:
     
     float GetWindowAspectRatio() { return renderer.GetAspectRatio(); };
     VkDevice GetDevice() { return device.device(); };
+
+	void initImGui();
+	void imguiRender(VkCommandBuffer commandBuffer); 
 };
 
 #endif /* Engine_hpp */

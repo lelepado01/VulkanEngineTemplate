@@ -72,6 +72,8 @@ class EngineDescriptorPool {
   void freeDescriptors(std::vector<VkDescriptorSet> &descriptors) const;
  
   void resetPool();
+
+  VkDescriptorPool getDescriptorPool() const { return descriptorPool; }
  
  private:
   EngineDevice &engineDevice;
