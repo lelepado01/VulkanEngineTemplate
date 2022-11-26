@@ -4,8 +4,6 @@ SHADER_CXX = glslc
 CFLAGS = -g -std=c++17 -O2
 LDFLAGS = -lglfw -lvulkan -ldl -lpthread 
 
-ONLY_HEADERS = $(wildcard *.h)
-
 SRC_FILES = $(subst ./main.cpp,,$(shell find . -type f -name "*.cpp"))
 OBJ_FILES = $(subst .cpp,.o,$(SRC_FILES))
 
@@ -19,7 +17,7 @@ OBJ_SHADER = $(addsuffix .spv,$(SRC_SHADER))
 
 NAME = VulkanEngineTemplate
 
-.cpp.o: %.cpp %.h $(ONLY_HEADERS)
+.cpp.o: %.cpp %.h 
 	$(CXX) $(CFLAGS) -o $@ -c $<
 
 %.vert.spv: %.vert

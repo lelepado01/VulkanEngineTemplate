@@ -39,7 +39,7 @@ Engine::Engine(){
     
     simpleRenderSystem = std::make_unique<SimpleRenderSystem>(device, renderer.GetSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout());
 
-	initImGui();
+	imGuiInit();
 
 }
 
@@ -50,6 +50,8 @@ void Engine::Update(){
     
     EngineInput::Update();
     EngineTime::Update();
+
+	imguiBeginRender(); 
 }
 
 void Engine::Draw(EngineCamera& camera){
@@ -76,7 +78,7 @@ void Engine::Draw(EngineCamera& camera){
             GetGameObjects(GameObjectTag::SIMPLE)};
         simpleRenderSystem->RenderGameObjects(frameInfo);
 
-		imguiRender(commandBuffer);
+		imguiEndRender(commandBuffer);
         
         renderer.EndSwapChainRenderPass(commandBuffer);
         renderer.EndFrame();
@@ -103,7 +105,7 @@ std::unique_ptr<EngineModel> Engine::LoadModelFromFile(const std::string &path){
     return EngineModel::createModelFromFile(device, path);
 }
 
-void Engine::initImGui(){
+void Engine::imGuiInit(){
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	// io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
@@ -135,13 +137,13 @@ void Engine::initImGui(){
 	ImGui_ImplVulkan_DestroyFontUploadObjects();
 }
 
-void Engine::imguiRender(VkCommandBuffer commandBuffer){
+void Engine::imguiBeginRender(){
 	ImGui_ImplVulkan_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	
-	ImGui::ShowDemoWindow();
-	
+}
+
+void Engine::imguiEndRender(VkCommandBuffer commandBuffer){
 	ImGui::Render();
 	ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
 }

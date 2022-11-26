@@ -4,6 +4,8 @@
 
 #include "engine/EngineModel.h"
 
+#include "imgui/imgui.h"
+
 int main() {
 	
     Engine engine;
@@ -22,17 +24,12 @@ int main() {
     while (engine.IsRunning()) {
         engine.Update();
 
-		// ImGui::Text("Hello, world %d", 123);  
-		// if (ImGui::Button("Save"))  
-		// {  
-		// 	// do stuff  
-		// }  
-		// ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));  
-		// ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-        
         float frameTime = EngineTime::DeltaTime();
 
         camera.Update(frameTime);
+
+		ImGui::Text("Hello, world %d", 123);
+		if (ImGui::Button("Save")){}
 
         engine.Draw(camera);
     }

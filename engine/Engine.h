@@ -80,8 +80,10 @@ public:
     float GetWindowAspectRatio() { return renderer.GetAspectRatio(); };
     VkDevice GetDevice() { return device.device(); };
 
-	void initImGui();
-	void imguiRender(VkCommandBuffer commandBuffer); 
+private: 
+	void imGuiInit();
+	void imguiBeginRender();
+	void imguiEndRender(VkCommandBuffer commandBuffer);
 };
 
 #endif /* Engine_hpp */

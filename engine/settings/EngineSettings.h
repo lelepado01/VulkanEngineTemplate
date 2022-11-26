@@ -21,7 +21,7 @@ private:
     
 public:
     inline static bool DrawWireframe = false;
-    inline static float CameraSpeed = 1;
+    inline static float CameraSpeed = 4.0f;
     
     inline static Light LightParams {
         glm::vec3(0.0f, 11.0f, 0.0f),
